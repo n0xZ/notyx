@@ -7,13 +7,13 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	label: string
 	errors: string | undefined
 }
-export  function FormField({ errors, label, name, register }: Props) {
+export function FormField({ errors, label, name, register, ...rest }: Props) {
 	return (
 		<aside className="flex flex-col justify-center w-96">
 			<label className="font-bold">{label}</label>
 			<input
-				type="text"
 				{...register(name)}
+				{...rest}
 				className="p-3 mb-2 border rounded-xl border-slate-300 ring-0  text-slate-500"
 			/>
 			<span className="h-6 text-red-500">
