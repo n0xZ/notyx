@@ -1,15 +1,22 @@
+import { useState } from 'react'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FormField } from '../components/form/FormField'
-import { FirebaseAuth } from '@/lib/firebase'
+import { FormField } from '@/components/form/FormField'
+import { auth } from '@/lib/firebase'
+import { useNavigate } from 'react-router-dom'
 
 export const signInValidator = z.object({
-	username: z.string().min(3, { message: 'Campo requerido' }),
+	email: z
+		.string()
+		.min(6, { message: 'Campo requerido' })
+		.email({ message: 'Formato de email ingresado no válido' }),
 	password: z.string().min(5, { message: 'Campo requerido' }),
 })
 
 export default function LoginPage() {
+	const [error, setError] = useState<unknown>(null)
 	const {
 		register,
 		formState: { errors },
@@ -18,8 +25,14 @@ export default function LoginPage() {
 	} = useForm<z.infer<typeof signInValidator>>({
 		resolver: zodResolver(signInValidator),
 	})
-	const onSubmit = handleSubmit((values) => {
-		console.log(values)
+	const navigate = useNavigate()
+	const onSubmit = handleSubmit(async ({ email, password }) => {
+		try {
+			const { user } = await signInWithEmailAndPassword(auth, email, password)
+			if (user) navigate('/home/main')
+		} catch (e) {
+			setError(e)
+		}
 	})
 	return (
 		<section className="grid place-items-center">
@@ -28,9 +41,9 @@ export default function LoginPage() {
 				className="flex flex-col items-center justify-center space-y-2 container mx-auto"
 			>
 				<FormField
-					errors={errors.username?.message}
-					name="username"
-					label="Nombre de usuario"
+					errors={errors.email?.message}
+					name="email"
+					label="Correo electrónico"
 					register={register}
 				/>
 				<FormField

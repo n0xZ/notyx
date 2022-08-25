@@ -5,7 +5,8 @@ export const LandingLayout = ({ children }: { children: ReactNode }) => {
 		<>
 			<header className="p-5  outline-2 outline-amber">
 				<nav className="flex flex-row items-center justify-between container mx-auto max-w-6xl">
-					<ul className="flex flex-row items-center">
+					<NavLink to="/">Notyx</NavLink>
+					<ul className="flex flex-row items-center space-x-3">
 						<li>
 							<NavLink to="/login">Iniciar sesión</NavLink>
 						</li>
