@@ -1,7 +1,9 @@
-import React from 'react'
+import { getFromDB } from '@/lib/supabase'
+
+import { useQuery } from '@tanstack/react-query'
 
 export default function MainHomePage() {
-  return (
-    <div>MainHomePage</div>
-  )
+	const { data } = useQuery(['notes'], async () => await getFromDB('notes'))
+
+	return <section></section>
 }

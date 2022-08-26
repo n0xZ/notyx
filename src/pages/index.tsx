@@ -6,7 +6,7 @@ export const LandingLayout = ({ children }: { children: ReactNode }) => {
 			<header className="p-5  outline-2 outline-amber">
 				<nav className="flex flex-row items-center justify-between container mx-auto max-w-6xl">
 					<NavLink to="/">Notyx</NavLink>
-					<ul className="flex flex-row items-center space-x-3">
+					<ul className="flex flex-row items-center space-x-5">
 						<li>
 							<NavLink to="/login">Iniciar sesión</NavLink>
 						</li>
@@ -16,17 +16,19 @@ export const LandingLayout = ({ children }: { children: ReactNode }) => {
 					</ul>
 				</nav>
 			</header>
-			<main className="min-h-screen h-full "> {children}</main>
+			<main className="min-h-screen h-screen "> {children}</main>
 		</>
 	)
 }
 export default function NoteLanding() {
 	return (
 		<LandingLayout>
-			<section className="grid place-items-center ">
-				<h1>Crea tus notas de manera personalizada.</h1>
-				<NavLink to="/login">Empezar ya</NavLink>
-				<NavLink to="/about">Qué es Notyx?</NavLink>
+			<section className="grid place-items-center h-full">
+				<article className="flex flex-col justify-center space-y-3 text-center">
+					<h1>Crea tus notas de manera personalizada.</h1>
+					<NavLink to="/login">Empezar ya</NavLink>
+					<NavLink to="/about">Qué es Notyx?</NavLink>
+				</article>
 			</section>
 		</LandingLayout>
 	)
