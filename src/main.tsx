@@ -7,12 +7,15 @@ import App from './App'
 
 import 'uno.css'
 import '@unocss/reset/tailwind.css'
+import { AnimatePresence } from 'framer-motion'
 const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
-				<App />
+				<AnimatePresence mode="wait">
+					<App />
+				</AnimatePresence>
 			</BrowserRouter>
 			<Toaster position="top-right" />
 		</QueryClientProvider>
