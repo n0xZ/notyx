@@ -1,23 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { NhostReactProvider } from '@nhost/react'
+import { NhostApolloProvider } from '@nhost/react-apollo'
+
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AnimatePresence } from 'framer-motion'
+
 import App from './App'
 
 import 'uno.css'
 import '@unocss/reset/tailwind.css'
-import { AnimatePresence } from 'framer-motion'
-const queryClient = new QueryClient()
+import { nhost } from './lib/nhost'
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
-		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
+		<NhostReactProvider nhost={nhost}>
+			<NhostApolloProvider nhost={nhost}>
 				<AnimatePresence mode="wait">
-					<App />
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
 				</AnimatePresence>
-			</BrowserRouter>
-			<Toaster position="top-right" />
-		</QueryClientProvider>
+				<Toaster position="top-right" />
+			</NhostApolloProvider>
+		</NhostReactProvider>
 	</React.StrictMode>
 )

@@ -1,10 +1,11 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
+import { Navigate } from 'react-router-dom'
+
+import { useSignInEmailPassword } from '@nhost/react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
-import { ApiError } from '@supabase/supabase-js'
 import { FormField } from '@/components/form/FormField'
-import { client } from '@/lib/supabase'
+import { nhost } from '@/lib/nhost'
 
 export const signInValidator = z.object({
 	email: z
@@ -13,30 +14,26 @@ export const signInValidator = z.object({
 		.email({ message: 'Formato de email ingresado no válido' }),
 	password: z.string().min(5, { message: 'Campo requerido' }),
 })
-type Credentials = z.infer<typeof signInValidator>
+
 export default function LoginPage() {
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
-		reset,
 	} = useForm<z.infer<typeof signInValidator>>({
 		resolver: zodResolver(signInValidator),
 	})
-	const SignInViaEmail = async ({ email, password }: Credentials) => {
-		const loginValues = await client.auth.signIn({ email, password })
-		if (loginValues.error) throw new Error(loginValues.error.message)
-		return loginValues
-	}
-	const mutation = useMutation(SignInViaEmail, {
-		onError(error: ApiError) {
-			return error
-		},
-	})
+	const {
+		error,
+		isLoading,
+		isSuccess,
+		needsEmailVerification,
+		signInEmailPassword,
+	} = useSignInEmailPassword()
 	const onSubmit = handleSubmit(async ({ email, password }) => {
-		mutation.mutate({ email, password })
+		await signInEmailPassword(email, password)
 	})
-
+	if (isSuccess) return <Navigate to="/home/main" replace={true} />
 	return (
 		<section className="grid place-items-center h-full min-h-screen">
 			<article className=" container mx-auto ">
@@ -47,6 +44,7 @@ export default function LoginPage() {
 					<FormField
 						errors={errors.email?.message}
 						name="email"
+						disabled={isLoading}
 						label="Correo electrónico"
 						register={register}
 					/>
@@ -55,15 +53,17 @@ export default function LoginPage() {
 						name="password"
 						type="password"
 						label="Contraseña"
+						disabled={isLoading}
 						register={register}
 					/>
 					<button
 						type="submit"
 						className="p-3 mb-2 text-lg font-bold rounded-xl bg-amber  w-96"
+						disabled={isLoading}
 					>
-						Iniciar sesión
+						{isLoading ? 'Iniciando...' : 'Iniciar sesión'}
 					</button>
-					<span className="h-12">{mutation.isError && mutation.error.message}</span>
+					<span className="h-12 c-red-500">{error && error.message}</span>
 				</form>
 			</article>
 		</section>
