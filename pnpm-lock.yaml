@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@apollo/client': ^3.6.9
+  '@headlessui/react': ^1.6.6
   '@hookform/resolvers': ^2.9.7
   '@nhost/react': ^0.12.3
   '@nhost/react-apollo': ^4.7.3
@@ -29,6 +30,7 @@ specifiers:
 
 dependencies:
   '@apollo/client': 3.6.9_onqnqwb3ubg5opvemcqf7c2qhy
+  '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
   '@nhost/react': 0.12.3_474lmp7wxssoja2xtazgkv3tmi
   '@nhost/react-apollo': 4.7.3_jx6nz2uejkeuaovgzodhlgzqau
   framer-motion: 7.2.1_biqbaboplfbrettd7655fr4n2y
@@ -402,6 +404,17 @@ packages:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       graphql: 16.6.0
+    dev: false
+
+  /@headlessui/react/1.6.6_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-MFJtmj9Xh/hhBMhLccGbBoSk+sk61BlP6sJe4uQcVMtXZhCgGqd2GyIQzzmsdPdTEWGSF434CBi8mnhR6um46Q==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@hookform/resolvers/2.9.7_react-hook-form@7.34.2:
