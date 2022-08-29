@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@headlessui/react": "^1.6.6",
+    "@iconify/react": "^3.2.2",
     "@nhost/react": "^0.12.3",
     "@nhost/react-apollo": "^4.7.3",
     "framer-motion": "^7.2.1",
@@ -28,7 +29,6 @@
     "@types/node": "^18.7.13",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
-    "@unocss/preset-icons": "^0.45.13",
     "@unocss/preset-mini": "^0.45.13",
     "@unocss/preset-web-fonts": "^0.45.13",
     "@unocss/reset": "^0.45.12",

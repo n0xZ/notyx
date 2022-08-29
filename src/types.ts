@@ -7,5 +7,5 @@ export type Note = {
 }
 
 export type NotesQuery = {
-	data: { note_by_userId: Note[] }
+	get_all_notes: Note[]
 }

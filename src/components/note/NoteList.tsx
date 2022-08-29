@@ -1,15 +1,15 @@
+import { NoteItem } from './NoteItem'
 import { Note } from '@/types'
-import React from 'react'
-import NoteItem from './NoteItem'
+
 type Props = {
 	notes: Note[]
 }
-export default function NotesList({ notes }: Props) {
+export function NotesList({ notes }: Props) {
 	return (
-		<section>
+		<article className="grid grid-rows-2 gap-4 place-items-center mt-6 container mx-auto ">
 			{notes.map((note) => (
-				<NoteItem note={note} />
+				<NoteItem note={note} key={note.noteId} />
 			))}
-		</section>
+		</article>
 	)
 }

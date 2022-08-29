@@ -1,8 +1,13 @@
 import { Note } from '@/types'
-import React from 'react'
+
 type Props = {
 	note: Note
 }
-export default function NoteItem({note}: Props) {
-	return <div>NoteItem</div>
+export  function NoteItem({ note }: Props) {
+	return (
+		<aside className="w-96 h-32 rounded-xl border-2 border-light flex flex-col justify-center text-center p-2">
+			<p>{note.title}</p>
+			<p>{note.createdAt.toString()}</p>
+		</aside>
+	)
 }

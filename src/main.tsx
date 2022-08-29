@@ -8,10 +8,10 @@ import { Toaster } from 'react-hot-toast'
 import { AnimatePresence } from 'framer-motion'
 
 import App from './App'
+import { nhost } from './lib/nhost'
 
 import 'uno.css'
 import '@unocss/reset/tailwind.css'
-import { nhost } from './lib/nhost'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>

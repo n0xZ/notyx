@@ -2,10 +2,9 @@ import { defineConfig } from 'vite'
 import Pages from 'vite-plugin-pages'
 import React from '@vitejs/plugin-react'
 import Unocss from 'unocss/vite'
-import { presetAttributify, presetUno } from 'unocss'
-import presetWebFonts from '@unocss/preset-web-fonts'
+import { presetAttributify, presetUno, presetWebFonts } from 'unocss'
+
 import presetMini from '@unocss/preset-mini'
-import presetIcons from '@unocss/preset-icons'
 import * as path from 'path'
 export default defineConfig({
 	plugins: [
@@ -16,7 +15,6 @@ export default defineConfig({
 				presetAttributify(),
 				presetUno(),
 				presetMini({ dark: 'class' }),
-				presetIcons(),
 				presetWebFonts({
 					provider: 'bunny',
 					fonts: {

@@ -4,12 +4,12 @@ specifiers:
   '@apollo/client': ^3.6.9
   '@headlessui/react': ^1.6.6
   '@hookform/resolvers': ^2.9.7
+  '@iconify/react': ^3.2.2
   '@nhost/react': ^0.12.3
   '@nhost/react-apollo': ^4.7.3
   '@types/node': ^18.7.13
   '@types/react': ^18.0.17
   '@types/react-dom': ^18.0.6
-  '@unocss/preset-icons': ^0.45.13
   '@unocss/preset-mini': ^0.45.13
   '@unocss/preset-web-fonts': ^0.45.13
   '@unocss/reset': ^0.45.12
@@ -31,6 +31,7 @@ specifiers:
 dependencies:
   '@apollo/client': 3.6.9_onqnqwb3ubg5opvemcqf7c2qhy
   '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
+  '@iconify/react': 3.2.2_react@18.2.0
   '@nhost/react': 0.12.3_474lmp7wxssoja2xtazgkv3tmi
   '@nhost/react-apollo': 4.7.3_jx6nz2uejkeuaovgzodhlgzqau
   framer-motion: 7.2.1_biqbaboplfbrettd7655fr4n2y
@@ -48,7 +49,6 @@ devDependencies:
   '@types/node': 18.7.13
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
-  '@unocss/preset-icons': 0.45.13
   '@unocss/preset-mini': 0.45.13
   '@unocss/preset-web-fonts': 0.45.13
   '@unocss/reset': 0.45.12
@@ -425,6 +425,14 @@ packages:
       react-hook-form: 7.34.2_react@18.2.0
     dev: true
 
+  /@iconify/react/3.2.2_react@18.2.0:
+    resolution: {integrity: sha512-z3+Jno3VcJzgNHsN5mEvYMsgCkOZkydqdIwOxjXh45+i2Vs9RGH68Y52vt39izwFSfuYUXhaW+1u7m7+IhCn/g==}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@iconify/types/1.1.0:
     resolution: {integrity: sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==}
     dev: true
@@ -797,16 +805,6 @@ packages:
     dependencies:
       '@iconify/utils': 1.0.33
       '@unocss/core': 0.45.12
-      ohmyfetch: 0.4.18
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /@unocss/preset-icons/0.45.13:
-    resolution: {integrity: sha512-f84rjUzbjL8j2gemygKMQ6H+8q9rSL86v9y2I6Xc8tI8D9vZeOrObsaHrfZutgFNlCmWsslPdtjB8PlHZ5gMMw==}
-    dependencies:
-      '@iconify/utils': 1.0.33
-      '@unocss/core': 0.45.13
       ohmyfetch: 0.4.18
     transitivePeerDependencies:
       - supports-color

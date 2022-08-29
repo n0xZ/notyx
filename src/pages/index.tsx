@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 export const LandingLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<>
-			<header className="p-5  outline-2 outline-amber bg-rose-100 ">
+			<header className="p-3   bg-rose-100 ">
 				<nav className="flex flex-row items-center justify-between container mx-auto max-w-6xl font-bold">
 					<NavLink to="/" className={({ isActive }) => (isActive ? '' : '')}>
 						Notyx
