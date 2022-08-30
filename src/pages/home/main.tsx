@@ -165,7 +165,7 @@ export default function MainHomePage() {
 				/>
 				<button title="Crear nueva tarea">
 					<Icon
-						icon="carbon:document-tasks"
+						icon="carbon:task-complete"
 						className="h-8 w-8"
 						onClick={openModal}
 					/>

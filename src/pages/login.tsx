@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
-import { useSignInEmailPassword } from '@nhost/react'
+import { useAuthenticationStatus, useSignInEmailPassword } from '@nhost/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormField } from '@/components/form/FormField'
 import { nhost } from '@/lib/nhost'
@@ -16,6 +16,8 @@ export const signInValidator = z.object({
 })
 
 export default function LoginPage() {
+	const { isLoading: loadingAuthentication, isAuthenticated } =
+		useAuthenticationStatus()
 	const {
 		register,
 		formState: { errors },
@@ -33,13 +35,14 @@ export default function LoginPage() {
 	const onSubmit = handleSubmit(async ({ email, password }) => {
 		await signInEmailPassword(email, password)
 	})
-	if (isSuccess) return <Navigate to="/home/main" replace={true} />
+	if (isSuccess && isAuthenticated)
+		return <Navigate to="/home/main" replace={true} />
 	return (
-		<section className="grid place-items-center h-full min-h-screen">
-			<article className=" container mx-auto ">
+		<section className="grid place-items-center h-full min-h-screen w-full bg-rose-300">
+			<article className=" container mx-auto grid place-items-center h-full">
 				<form
 					onSubmit={onSubmit}
-					className="flex flex-col items-center justify-center space-y-2 container mx-auto"
+					className="flex flex-col items-center justify-center space-y-2 container mx-auto p-16  bg-gray-50 rounded-xl"
 				>
 					<FormField
 						errors={errors.email?.message}
@@ -58,7 +61,7 @@ export default function LoginPage() {
 					/>
 					<button
 						type="submit"
-						className="p-3 mb-2 text-lg font-bold rounded-xl bg-amber  w-96"
+						className="p-3 mb-2 text-lg font-bold rounded-xl button-rose-200  w-96"
 						disabled={isLoading}
 					>
 						{isLoading ? 'Iniciando...' : 'Iniciar sesión'}

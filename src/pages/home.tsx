@@ -1,14 +1,16 @@
 import { Navigate, NavLink, Outlet } from 'react-router-dom'
 import { useAuthenticationStatus, useSignOut, useUserData } from '@nhost/react'
-
+import { Icon } from '@iconify/react'
 import { Menu, Transition } from '@headlessui/react'
 import { motion } from 'framer-motion'
 import { Fragment } from 'react'
 import LoadingAvatar from '@/components/loading/LoadingAvatar'
+import GlobalLoading from '@/components/loading/GlobalLoading'
 type AvatarProps = {
 	user: ReturnType<typeof useUserData>
 }
 export const Avatar = ({ user }: AvatarProps) => {
+	const { signOut } = useSignOut()
 	return (
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
@@ -16,7 +18,7 @@ export const Avatar = ({ user }: AvatarProps) => {
 					<img
 						src={user?.avatarUrl}
 						alt={`${user?.displayName} image`}
-						className="rounded-full w-12"
+						className="rounded-full w-12 h-12"
 					/>
 				</Menu.Button>
 			</div>
@@ -36,55 +38,25 @@ export const Avatar = ({ user }: AvatarProps) => {
 								<NavLink
 									to="/home/profile"
 									className={`${
-										active ? 'bg-violet-500 text-white' : 'text-gray-900'
-									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+										active ? 'bg-rose-500 text-white' : 'text-gray-900'
+									} group flex w-full items-center rounded-md px-2 py-2 text-sm space-x-2`}
 								>
-									Mi perfil
+									<Icon icon="uil:user-circle" />
+									<span>Mi perfil</span>
 								</NavLink>
 							)}
 						</Menu.Item>
 						<Menu.Item>
 							{({ active }) => (
 								<button
+									onClick={signOut}
 									className={`${
-										active ? 'bg-violet-500 text-white' : 'text-gray-900'
-									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+										active ? 'bg-rose-500 text-white' : 'text-gray-900'
+									} group flex w-full items-center rounded-md px-2 py-2 text-sm space-x-2`}
 								>
-									Duplicate
+									<Icon icon="uil:expand-from-corner" />
+									<span>Cerrar sesión</span>
 								</button>
-							)}
-						</Menu.Item>
-					</div>
-					<div className="px-1 py-1">
-						<Menu.Item>
-							{({ active }) => (
-								<button
-									className={`${
-										active ? 'bg-violet-500 text-white' : 'text-gray-900'
-									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-								>
-									Archive
-								</button>
-							)}
-						</Menu.Item>
-						<Menu.Item>
-							{({ active }) => (
-								<button
-									className={`${
-										active ? 'bg-violet-500 text-white' : 'text-gray-900'
-									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-								></button>
-							)}
-						</Menu.Item>
-					</div>
-					<div className="px-1 py-1">
-						<Menu.Item>
-							{({ active }) => (
-								<button
-									className={`${
-										active ? 'bg-violet-500 text-white' : 'text-gray-900'
-									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-								></button>
 							)}
 						</Menu.Item>
 					</div>
@@ -95,7 +67,7 @@ export const Avatar = ({ user }: AvatarProps) => {
 }
 export default function HomeOutlet() {
 	const { isLoading, isAuthenticated } = useAuthenticationStatus()
-	const { signOut } = useSignOut()
+
 	const user = useUserData()
 	const transitionVariants = {
 		initial: {
@@ -116,11 +88,15 @@ export default function HomeOutlet() {
 		return <Navigate to="/login" replace={true} />
 	return (
 		<>
-			<header className="p-3 bg-rose-100 sticky top-0 h-19">
-				<nav className="flex flex-row items-center justify-between container mx-auto max-w-6xl">
-					<NavLink to="/home/main" className="h-6 w-6">
-						Home
+			<header className="p-4 bg-rose-100 sticky top-0 ">
+				<nav className="flex flex-row items-center justify-between container mx-auto max-w-5xl">
+					<NavLink
+						to="/home/main"
+						className="font-bold xl:text-xl text-lg flex flex-row items-center space-x-2 hover:c-rose-400 duration-100 ease-in-out"
+					>
+						<Icon icon="uil:home-alt" className='h-8 w-8' />
 					</NavLink>
+
 					{isLoading ? <LoadingAvatar /> : <Avatar user={user} />}
 				</nav>
 			</header>

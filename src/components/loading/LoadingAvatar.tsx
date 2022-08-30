@@ -1,7 +1,7 @@
 export default function LoadingAvatar() {
 	return (
 		<svg
-			className="w-12 text-gray-400 animate-pulse bg-gray-300 rounded-full"
+			className="w-12 h-12 text-gray-400 animate-pulse bg-gray-300 rounded-full"
 			fill="currentColor"
 			viewBox="0 0 20 20"
 			xmlns="http://www.w3.org/2000/svg"
