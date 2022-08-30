@@ -14,7 +14,7 @@ export const Avatar = ({ user }: AvatarProps) => {
 	return (
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
-				<Menu.Button className=" w-full justify-center rounded-md bg-black bg-opacity-20  text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+				<Menu.Button className=" w-full justify-center rounded-md    text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
 					<img
 						src={user?.avatarUrl}
 						alt={`${user?.displayName} image`}
@@ -31,7 +31,7 @@ export const Avatar = ({ user }: AvatarProps) => {
 				leaveFrom="transform opacity-100 scale-100"
 				leaveTo="transform opacity-0 scale-95"
 			>
-				<Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+				<Menu.Items className="absolute right-0 mt-2 w-60 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 					<div className="px-1 py-1 ">
 						<Menu.Item>
 							{({ active }) => (
@@ -83,18 +83,17 @@ export default function HomeOutlet() {
 			},
 		},
 	}
-
-	if (!isAuthenticated && !isLoading)
-		return <Navigate to="/login" replace={true} />
+	if (isLoading) return null
+	if (!isAuthenticated && !isLoading) return <Navigate to="/login" />
 	return (
 		<>
 			<header className="p-4 bg-rose-100 sticky top-0 ">
 				<nav className="flex flex-row items-center justify-between container mx-auto max-w-5xl">
 					<NavLink
-						to="/home/main"
+						to="/home/general"
 						className="font-bold xl:text-xl text-lg flex flex-row items-center space-x-2 hover:c-rose-400 duration-100 ease-in-out"
 					>
-						<Icon icon="uil:home-alt" className='h-8 w-8' />
+						<Icon icon="uil:home-alt" className="h-8 w-8" />
 					</NavLink>
 
 					{isLoading ? <LoadingAvatar /> : <Avatar user={user} />}

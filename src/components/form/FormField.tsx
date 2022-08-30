@@ -9,14 +9,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 export function FormField({ errors, label, name, register, ...rest }: Props) {
 	return (
-		<aside className="flex flex-col justify-center w-96">
-			<label className="font-bold">{label}</label>
+		<aside className="flex flex-col justify-center w-96 mt-4">
+			<label className="font-medium">{label}</label>
 			<input
 				{...register(name)}
 				{...rest}
-				className="p-3 mb-2 border rounded-xl border-slate-300 ring-0  text-slate-500"
+				className="p-3 mb-2 border rounded-lg  bg-rose-200 border-rose-300 ring-0  text-slate-500"
 			/>
-			<span className="h-6 text-red-500">
+			<span className="h-6 text-red-600">
 				{errors?.length !== 0 ? errors : null}
 			</span>
 		</aside>

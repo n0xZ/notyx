@@ -23,7 +23,7 @@ export const LandingLayout = ({ children }: { children: ReactNode }) => {
 					<NavLink to="/" className={({ isActive }) => (isActive ? '' : '')}>
 						Notyx
 					</NavLink>
-					<ul className="flex flex-row items-center space-x-5 hidden xl:sticky">
+					<ul className="xl:flex flex-row items-center space-x-5 hidden xl:sticky">
 						<li>
 							<NavLink to="/login">Iniciar sesión</NavLink>
 						</li>
@@ -76,9 +76,9 @@ export default function NoteLanding() {
 				<img
 					src="https://opendoodles.s3-us-west-1.amazonaws.com/clumsy.svg"
 					alt="Imagen de la landing"
-					width={380}
-					height={380}
 					className="rounded"
+					height={480}
+					width={480}
 				/>
 			</section>
 

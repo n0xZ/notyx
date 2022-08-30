@@ -10,8 +10,7 @@ import { AnimatePresence } from 'framer-motion'
 import App from './App'
 import { nhost } from './lib/nhost'
 
-import 'uno.css'
-import '@unocss/reset/tailwind.css'
+import './styles/tailwind.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>

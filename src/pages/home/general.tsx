@@ -1,9 +1,9 @@
-import { ChangeEvent, Fragment, useState } from 'react'
+import { ChangeEvent, Fragment, useEffect, useState } from 'react'
 import { Icon } from '@iconify/react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useMutation, useQuery } from '@apollo/client'
+import { ApolloQueryResult, useMutation, useQuery } from '@apollo/client'
 import { useUserData } from '@nhost/react'
 import { Dialog, Transition } from '@headlessui/react'
 
@@ -12,12 +12,15 @@ import { createNoteMutation } from '@/graphql/mutations'
 import { NotesList } from '@/components/note/NoteList'
 import { FormField } from '@/components/form/FormField'
 import { Note, NotesQuery } from '@/types'
+import toast from 'react-hot-toast'
+import LoadingSkeleton from '@/components/loading/LoadingSkeleton'
 type QueryVariable = {
 	userId: string | undefined
 }
 
 type CreateModalProps = {
 	isOpen: boolean
+	refetchNotes: () => void
 	closeModal: () => void
 }
 type MutationReturnType = {
@@ -32,7 +35,11 @@ const createFormValidator = z.object({
 	title: z.string().min(5, { message: 'Campo requerido' }),
 	description: z.string().min(5, { message: 'Campo requerido' }),
 })
-export function CreateNoteModal({ isOpen, closeModal }: CreateModalProps) {
+export function CreateNoteModal({
+	isOpen,
+	closeModal,
+	refetchNotes,
+}: CreateModalProps) {
 	const user = useUserData()
 	const {
 		register,
@@ -53,7 +60,10 @@ export function CreateNoteModal({ isOpen, closeModal }: CreateModalProps) {
 				userId: user?.id!,
 			},
 		})
+
+		if (result.called) refetchNotes()
 	})
+
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
 			<Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -82,7 +92,7 @@ export function CreateNoteModal({ isOpen, closeModal }: CreateModalProps) {
 							<Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
 								<Dialog.Title
 									as="h3"
-									className="text-lg font-bold font-medium leading-6 text-gray-900 mb-2"
+									className="text-lg  font-bold leading-6 text-gray-900 mb-2"
 								>
 									Crear nueva nota
 								</Dialog.Title>
@@ -138,6 +148,9 @@ export default function MainHomePage() {
 	const {
 		data: notes,
 		loading,
+		fetchMore,
+		refetch,
+		networkStatus,
 		error,
 	} = useQuery<NotesQuery, QueryVariable>(getNotesByUserId, {
 		variables: { userId: user?.id },
@@ -151,10 +164,18 @@ export default function MainHomePage() {
 	const closeModal = () => {
 		setIsOpen(false)
 	}
+	useEffect(() => {
+		console.log(networkStatus)
+	}, [networkStatus])
+
+	const refetchNotes = () => {
+		refetch({ userId: user?.id })
+	}
 	if (error) return <div>Hubo un error al cargar las notas.</div>
+
 	return (
 		<section className="h-full space-y-2 ">
-			<article className="h-12  mt-5 flex flex-row items-center space-x-3 mb-6 container mx-auto max-w-5xl">
+			<article className="h-12  mt-5  items-center space-x-3 mb-6 container mx-auto max-w-5xl flex flex-row justify-center">
 				<input
 					type="text"
 					placeholder="Buscar nota por nombre..."
@@ -164,15 +185,16 @@ export default function MainHomePage() {
 					className="px-5 py-3 rounded-lg border-2 border-gray-200 w-2xl"
 				/>
 				<button title="Crear nueva tarea">
-					<Icon
-						icon="carbon:task-complete"
-						className="h-8 w-8"
-						onClick={openModal}
-					/>
+					<Icon icon="gg:add-r" className="h-8 w-8" onClick={openModal} />
 				</button>
 			</article>
-			{notes && !loading && <NotesList notes={notes?.get_all_notes} />}
-			<CreateNoteModal closeModal={closeModal} isOpen={isOpen} />
+			{loading && <LoadingSkeleton />}
+			{notes && <NotesList notes={notes?.get_all_notes} />}
+			<CreateNoteModal
+				closeModal={closeModal}
+				isOpen={isOpen}
+				refetchNotes={refetchNotes}
+			/>
 		</section>
 	)
 }
