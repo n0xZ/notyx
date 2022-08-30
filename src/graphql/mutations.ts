@@ -1,16 +1,15 @@
 import { gql } from '@apollo/client'
 
 export const createNoteMutation = gql`
-	mutation createNote($userId: uuid!, $title: String!, $description: String!) {
-		insert_notes(
-			objects: { title: $title, description: $description, userId: $userId }
+	mutation createNote($userId: uuid, $title: String!, $description: String!) {
+		insert_notes_one(
+			object: { title: $title, userId: $userId, description: $description }
 		) {
-			returning {
-				noteId
-				title
-				description
-				createdAt
-			}
+			title
+			description
+			noteId
+			createdAt
+			userId
 		}
 	}
 `
