@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const getNotesByUserId = gql`
+export const GET_NOTES_BY_USER_ID_QUERY = gql`
 	query getNotesByUserId($userId: uuid) {
 		get_all_notes(where: { userId: { _eq: $userId } }) {
 			noteId
@@ -11,10 +11,11 @@ export const getNotesByUserId = gql`
 	}
 `
 
-export const getCollectionsByUserId = gql`
+export const GET_COLLECTIONS_BY_USER_ID_QUERY = gql`
 	query getCollectionNotesByUserId($userId: uuid!) {
 		collections(where: { userId: { _eq: $userId } }) {
 			title
+			collectionId
 			collectionNotes {
 				title
 				description
@@ -22,16 +23,12 @@ export const getCollectionsByUserId = gql`
 		}
 	}
 `
-export const updateNotesCollection = gql`
-	mutation updateCollection($userId: uuid, $collectionId: uuid!, $notes: jsonb) {
-		update_collections(
-			where: { userId: { _eq: $userId }, collectionId: { _eq: $collectionId } }
-			_prepend: { notes: $notes }
-		) {
-			returning {
+export const GET_COLLECTIONS_BY_COLLECTION_ID_QUERY = gql`
+	query getCollectionNotesByUserId($collectionId: uuid!) {
+		collections(where: { collectionId: { _eq: $collectionId } }) {
+			collectionNotes {
 				title
-				notes
-				collectionId
+				description
 			}
 		}
 	}
