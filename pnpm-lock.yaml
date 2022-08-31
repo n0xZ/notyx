@@ -21,6 +21,7 @@ specifiers:
   react-hot-toast: ^2.3.0
   react-intersection-observer: ^9.4.0
   react-redux: ^8.0.2
+  react-router: ^6.3.0
   react-router-dom: ^6.3.0
   tailwindcss: ^3.1.8
   typescript: ^4.6.4
@@ -44,8 +45,9 @@ dependencies:
   react-hot-toast: 2.3.0_biqbaboplfbrettd7655fr4n2y
   react-intersection-observer: 9.4.0_react@18.2.0
   react-redux: 8.0.2_76am3hp3mjvgy3cckgdecixdi4
+  react-router: 6.3.0_react@18.2.0
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
-  tailwindcss: 3.1.8
+  tailwindcss: 3.1.8_postcss@8.4.16
   zod: 3.18.0
 
 devDependencies:
@@ -2175,10 +2177,12 @@ packages:
     engines: {node: '>=0.10'}
     dev: false
 
-  /tailwindcss/3.1.8:
+  /tailwindcss/3.1.8_postcss@8.4.16:
     resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
