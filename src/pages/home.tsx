@@ -5,7 +5,8 @@ import { Menu, Transition } from '@headlessui/react'
 import { motion } from 'framer-motion'
 import { Fragment } from 'react'
 import LoadingAvatar from '@/components/loading/LoadingAvatar'
-import GlobalLoading from '@/components/loading/GlobalLoading'
+
+
 type AvatarProps = {
 	user: ReturnType<typeof useUserData>
 }
@@ -85,6 +86,7 @@ export default function HomeOutlet() {
 	}
 	if (isLoading) return null
 	if (!isAuthenticated && !isLoading) return <Navigate to="/login" />
+
 	return (
 		<>
 			<header className="p-4 bg-rose-100 sticky top-0 ">

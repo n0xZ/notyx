@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { ApolloQueryResult, useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { useUserData } from '@nhost/react'
 import { Dialog, Transition } from '@headlessui/react'
 
@@ -12,7 +12,7 @@ import { createNoteMutation } from '@/graphql/mutations'
 import { NotesList } from '@/components/note/NoteList'
 import { FormField } from '@/components/form/FormField'
 import { Note, NotesQuery } from '@/types'
-import toast from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton'
 type QueryVariable = {
 	userId: string | undefined
@@ -53,15 +53,20 @@ export function CreateNoteModal({
 		createNoteMutation
 	)
 	const onSubmit = handleSubmit((values) => {
-		mutate({
-			variables: {
-				title: values.title,
-				description: values.description,
-				userId: user?.id!,
-			},
-		})
-
-		if (result.called) refetchNotes()
+		toast.promise(
+			mutate({
+				variables: {
+					title: values.title,
+					description: values.description,
+					userId: user?.id!,
+				},
+			}),
+			{
+				success: 'Tarea creada con exito',
+				error: 'Ocurrió un error al crear la nota',
+				loading: 'Creando nota...',
+			}
+		)
 	})
 
 	return (
@@ -104,6 +109,7 @@ export function CreateNoteModal({
 									<FormField
 										errors={errors.title?.message}
 										name="title"
+										type="text"
 										disabled={result.loading}
 										label="Titulo de la nota"
 										register={register}
@@ -111,7 +117,6 @@ export function CreateNoteModal({
 									<FormField
 										errors={errors.description?.message}
 										name="description"
-										type="text"
 										label="Descripción de la nota"
 										disabled={result.loading}
 										register={register}
@@ -164,9 +169,6 @@ export default function MainHomePage() {
 	const closeModal = () => {
 		setIsOpen(false)
 	}
-	useEffect(() => {
-		console.log(networkStatus)
-	}, [networkStatus])
 
 	const refetchNotes = () => {
 		refetch({ userId: user?.id })
@@ -195,6 +197,7 @@ export default function MainHomePage() {
 				isOpen={isOpen}
 				refetchNotes={refetchNotes}
 			/>
+			<Toaster position="top-right" />
 		</section>
 	)
 }
