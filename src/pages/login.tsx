@@ -16,8 +16,7 @@ export const signInValidator = z.object({
 })
 
 export default function LoginPage() {
-	const { isLoading: loadingAuthentication, isAuthenticated } =
-		useAuthenticationStatus()
+	const { isAuthenticated } = useAuthenticationStatus()
 	const {
 		register,
 		formState: { errors },
@@ -29,7 +28,7 @@ export default function LoginPage() {
 		error,
 		isLoading,
 		isSuccess,
-		needsEmailVerification,
+
 		signInEmailPassword,
 	} = useSignInEmailPassword()
 	const onSubmit = handleSubmit(async ({ email, password }) => {
@@ -45,13 +44,14 @@ export default function LoginPage() {
 					className="flex flex-col items-center justify-center space-y-4 container mx-auto   rounded-xl"
 				>
 					<h1 className="mb-2 text-3xl font-bold">Bienvenido a Notyx!</h1>
-					<p className='mb-3'>
+					<p className="mb-3">
 						Estas a un paso de poder crear tus notas personalizadas, de manera
 						flexible y eficiente.
 					</p>
 					<FormField
 						errors={errors.email?.message}
 						name="email"
+						type="email"
 						disabled={isLoading}
 						label="Correo electrónico"
 						register={register}
@@ -71,6 +71,10 @@ export default function LoginPage() {
 					>
 						{isLoading ? 'Iniciando...' : 'Iniciar sesión'}
 					</button>
+					<p>
+						No posee cuenta?
+						<Link to="/register">haga click aquí para crear una nueva cuenta</Link>
+					</p>
 					<span className="h-12 text-red-500">{error && error.message}</span>
 				</form>
 				<img

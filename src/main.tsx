@@ -5,8 +5,6 @@ import { NhostApolloProvider } from '@nhost/react-apollo'
 
 import { BrowserRouter } from 'react-router-dom'
 
-import { AnimatePresence } from 'framer-motion'
-
 import App from './App'
 import { nhost } from './lib/nhost'
 
@@ -16,11 +14,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<NhostReactProvider nhost={nhost}>
 			<NhostApolloProvider nhost={nhost}>
-				<AnimatePresence mode="wait">
-					<BrowserRouter>
-						<App />
-					</BrowserRouter>
-				</AnimatePresence>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
 			</NhostApolloProvider>
 		</NhostReactProvider>
 	</React.StrictMode>

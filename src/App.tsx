@@ -1,10 +1,16 @@
+import { AnimatePresence } from 'framer-motion'
 import { Suspense } from 'react'
-import { useRoutes } from 'react-router-dom'
+import { useLocation, useRoutes } from 'react-router-dom'
 import routes from '~react-pages'
 import GlobalLoading from './components/loading/GlobalLoading'
 
 function App() {
-	return <Suspense fallback={<GlobalLoading />}>{useRoutes(routes)}</Suspense>
+	const location = useLocation()
+	return (
+		<AnimatePresence mode="wait" key={location.pathname}>
+			<Suspense fallback={<GlobalLoading />}>{useRoutes(routes)}</Suspense>
+		</AnimatePresence>
+	)
 }
 
 export default App

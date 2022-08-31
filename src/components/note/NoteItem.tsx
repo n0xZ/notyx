@@ -1,6 +1,6 @@
+import { useUserAvatarUrl } from '@nhost/react'
 import { motion } from 'framer-motion'
 import { Note } from '@/types'
-import { useUserAvatarUrl } from '@nhost/react'
 type Props = {
 	note: Note
 }
