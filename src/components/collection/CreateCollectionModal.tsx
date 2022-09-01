@@ -14,7 +14,7 @@ import { FormField } from '@/components/form/FormField'
 
 import { Collection } from '@/types'
 
-type CreateModalProps = {
+type CreateCollectionModalProps = {
 	isOpen: boolean
 	closeModal: () => void
 }
@@ -29,7 +29,10 @@ type MutationVariables = {
 const createNoteFormValidator = z.object({
 	title: z.string().min(5, { message: 'Campo requerido' }),
 })
-export function CreateNoteModal({ isOpen, closeModal }: CreateModalProps) {
+export function CreateCollectionModal({
+	isOpen,
+	closeModal,
+}: CreateCollectionModalProps) {
 	const userId = useUserId()
 	const {
 		register,
@@ -100,20 +103,21 @@ export function CreateNoteModal({ isOpen, closeModal }: CreateModalProps) {
 										name="title"
 										type="text"
 										disabled={result.loading}
-										label="Titulo de la nota"
+										label="Titulo de la colección"
+										placeholder="Mi nueva colección"
 										register={register}
 									/>
 
 									<div className="mt-4 flex flex-row items-center space-x-3">
 										<button
 											type="submit"
-											className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+											className="inline-flex justify-center rounded-md border border-transparent bg-rose-400 px-4 py-2 text-base font-medium text-neutral-50 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
 										>
 											Crear nueva colección
 										</button>
 										<button
 											type="button"
-											className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+											className="inline-flex justify-center rounded-md border border-transparent bg-red-300 px-4 py-2 text-base	 font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
 											onClick={closeModal}
 										>
 											Cerrar formulario
