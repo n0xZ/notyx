@@ -21,12 +21,3 @@ export type CollectionQuery = {
 export type CollectionQueryVariables = {
 	userId?: string
 }
-
-export type CreateNoteMutationReturnType = {
-	insert_notes_one: Note
-}
-export type CreateNoteMutationVariables = {
-	title: string
-	description: string
-	userId: string
-}
