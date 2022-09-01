@@ -13,12 +13,17 @@ export const CREATE_NOTE_MUTATION = gql`
 		}
 	}
 `
+export const CREATE_NOTE_ON_EXISTING_COLLECTION = gql``
 export const CREATE_COLLECTION_MUTATION = gql`
 	mutation createCollection($userId: uuid!, $title: String!) {
 		insert_collections_one(object: { title: $title, userId: $userId }) {
 			title
 			collectionId
-			collectionNotes
+			collectionNotes {
+				title
+				noteId
+				description
+			}
 			userId
 		}
 	}
