@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { Icon } from '@iconify/react'
 import { useQuery } from '@apollo/client'
-
 import { GET_COLLECTIONS_BY_COLLECTION_ID_QUERY } from '@/graphql/queries'
 import LoadingSkeleton from '@/components/loading/LoadingSkeleton'
 import { NotesList } from '@/components/note/NoteList'
+import { CreateNoteModal } from '@/components/note/CreateNoteModal'
 import { CollectionQuery } from '@/types'
 type CollectionVariables = {
 	collectionId?: string
@@ -64,7 +64,7 @@ export default function CollectionById() {
 				</p>
 			)}
 
-			{/* <CreateNoteModal closeModal={closeModal} isOpen={isOpen} /> */}
+			<CreateNoteModal closeModal={closeModal} isOpen={isOpen} />
 			<Toaster position="top-right" />
 		</section>
 	)

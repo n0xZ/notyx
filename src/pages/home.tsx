@@ -89,7 +89,7 @@ export default function HomeOutlet() {
 
 	return (
 		<>
-			<header className="p-4 bg-rose-100 sticky top-0 ">
+			<header className="p-4 bg-rose-100 sticky top-0  z-10">
 				<nav className="flex flex-row items-center justify-between container mx-auto max-w-5xl">
 					<NavLink
 						to="/home/general"

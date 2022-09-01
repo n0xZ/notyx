@@ -44,7 +44,7 @@ export const LandingLayout = ({ children }: { children: ReactNode }) => {
 		</>
 	)
 }
-export default function NoteLanding() {
+export default function Landing() {
 	return (
 		<LandingLayout>
 			<section className="flex flex-col justify-center items-center space-y-10 h-full ">
