@@ -26,6 +26,7 @@ specifiers:
   react-redux: ^8.0.2
   react-router: ^6.3.0
   react-router-dom: ^6.3.0
+  react-uuid: ^1.0.3
   tailwindcss: ^3.1.8
   typescript: ^4.6.4
   vite: ^3.0.7
@@ -50,6 +51,7 @@ dependencies:
   react-redux: 8.0.2_76am3hp3mjvgy3cckgdecixdi4
   react-router: 6.3.0_react@18.2.0
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
+  react-uuid: 1.0.3
   tailwindcss: 3.1.8_postcss@8.4.16
   zod: 3.18.0
 
@@ -2304,6 +2306,10 @@ packages:
     dependencies:
       history: 5.3.0
       react: 18.2.0
+    dev: false
+
+  /react-uuid/1.0.3:
+    resolution: {integrity: sha512-cw6Rr6JphvsdK4xHPGBjKD7XSH6Y6i4NJFWUO3OiDd7NLcR8xVeQ3CfeKm7h+S5tpZZVfbH3Tkrz/ydsIiV8pA==}
     dev: false
 
   /react/18.2.0:

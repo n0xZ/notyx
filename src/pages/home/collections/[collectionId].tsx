@@ -64,7 +64,11 @@ export default function CollectionById() {
 				</p>
 			)}
 
-			<CreateNoteModal closeModal={closeModal} isOpen={isOpen} />
+			<CreateNoteModal
+				closeModal={closeModal}
+				isOpen={isOpen}
+				collectionId={params.collectionId}
+			/>
 			<Toaster position="top-right" />
 		</section>
 	)

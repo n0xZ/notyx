@@ -24,7 +24,7 @@ function CollectionsListDisplay({ collections }: CollectionListProps) {
 						}
 					>
 						<Icon icon="uil:folder" className="h-4 w-4" />
-						<span className='truncate'> {collection.title}</span>
+						<span className="truncate"> {collection.title}</span>
 					</NavLink>
 				</div>
 			))}
@@ -32,7 +32,6 @@ function CollectionsListDisplay({ collections }: CollectionListProps) {
 	)
 }
 export default function ColllectionOutlet() {
-	const params = useParams()
 	const userId = useUserId()
 	const {
 		data: collections,

@@ -10,9 +10,6 @@ export type Collection = {
 	userId: string
 	collectionNotes: Note[]
 }
-export type NotesQuery = {
-	get_all_notes: Note[]
-}
 
 export type CollectionQuery = {
 	collections: Collection[]

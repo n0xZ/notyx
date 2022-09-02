@@ -7,31 +7,36 @@ import toast from 'react-hot-toast'
 import { useMutation } from '@apollo/client'
 import { useUserId } from '@nhost/react'
 import { Dialog, Transition } from '@headlessui/react'
-
-import { CREATE_NOTE_MUTATION } from '@/graphql/mutations'
+import uuid from 'react-uuid'
+import { CREATE_NOTE_ON_EXISTING_COLLECTION_MUTATION } from '@/graphql/mutations'
 
 import { FormField } from '@/components/form/FormField'
 
-import { Collection, Note } from '@/types'
+import { Note } from '@/types'
 
 type CreateNoteModalProps = {
 	isOpen: boolean
 	closeModal: () => void
+	collectionId?: string
 }
 
 export type CreateNoteMutationReturnType = {
 	insert_notes_one: Note
 }
 export type CreateNoteMutationVariables = {
-	title: string
-	description: string
 	userId: string
+	collectionId?: string
+	collectionNotes: Note[]
 }
 const createNoteFormValidator = z.object({
 	title: z.string().min(5, { message: 'Campo requerido' }),
 	description: z.string().min(5, { message: 'Campo requerido' }),
 })
-export function CreateNoteModal({ isOpen, closeModal }: CreateNoteModalProps) {
+export function CreateNoteModal({
+	isOpen,
+	closeModal,
+	collectionId,
+}: CreateNoteModalProps) {
 	const userId = useUserId()
 	const {
 		register,
@@ -44,14 +49,23 @@ export function CreateNoteModal({ isOpen, closeModal }: CreateNoteModalProps) {
 	const [mutate, result] = useMutation<
 		CreateNoteMutationReturnType,
 		CreateNoteMutationVariables
-	>(CREATE_NOTE_MUTATION)
+	>(CREATE_NOTE_ON_EXISTING_COLLECTION_MUTATION)
 	const onSubmit = handleSubmit((values) => {
+		const collectionNotes: Note[] = [
+			{
+				noteId: uuid(),
+				title: values.title,
+				description: values.description,
+				createdAt: new Date(),
+			},
+		]
+
 		toast.promise(
 			mutate({
 				variables: {
-					title: values.title,
-					description: values.description,
 					userId: userId!,
+					collectionId,
+					collectionNotes,
 				},
 			}),
 			{
