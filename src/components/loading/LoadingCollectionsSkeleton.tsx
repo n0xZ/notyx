@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function LoadingCollections() {
+export default function LoadingCollectionsSkeleton() {
 	return (
 		<aside className=" grid grid-rows-2 xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-5 place-items-center mt-6 container mx-auto ">
 			<div className="mx-auto  h-36 w-72 rounded-md border-2">

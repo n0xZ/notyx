@@ -16,7 +16,7 @@ const transitionVariants = {
 		},
 	},
 }
-export default function GlobalLoading() {
+export default function HomeLoading() {
 	return (
 		<>
 			<header className="p-3 bg-rose-100 sticky top-0 h-19 w-full">
@@ -34,7 +34,7 @@ export default function GlobalLoading() {
 				variants={transitionVariants}
 				className="h-full grid place-items-center"
 			>
-				<p>Cargando contenido...</p>
+				<p>Cargando colecciones.</p>
 			</motion.main>
 		</>
 	)
