@@ -28,7 +28,6 @@ function CollectionsListDisplay({ collections }: CollectionListProps) {
 							<span className="truncate"> {collection.title}</span>
 						</div>
 					</NavLink>
-					<Icon icon="uil:folder" className="h-4 w-4" />
 				</div>
 			))}
 		</div>
