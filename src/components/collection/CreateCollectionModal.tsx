@@ -29,11 +29,12 @@ type MutationVariables = {
 const createNoteFormValidator = z.object({
 	title: z.string().min(5, { message: 'Campo requerido' }),
 })
-export function CreateCollectionModal({
+export default function CreateCollectionModal({
 	isOpen,
 	closeModal,
 }: CreateCollectionModalProps) {
 	const userId = useUserId()
+
 	const {
 		register,
 		handleSubmit,
