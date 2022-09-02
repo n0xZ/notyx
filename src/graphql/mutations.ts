@@ -31,15 +31,13 @@ export const CREATE_COLLECTION_MUTATION = gql`
 	}
 `
 
-export const UPDATE_NOTES_MUTATION = gql`
-	mutation updateCollection($userId: uuid, $collectionId: uuid!, $notes: jsonb) {
-		update_collections(
-			where: { userId: { _eq: $userId }, collectionId: { _eq: $collectionId } }
-			_prepend: { notes: $notes }
-		) {
+export const DELETE_COLLECTION = gql`
+	mutation deleteCollection($collectionId: uuid!) {
+		delete_collections(where: { collectionId: { _eq: $collectionId } }) {
 			returning {
+				userId
 				title
-				notes
+				collectionNotes
 				collectionId
 			}
 		}
