@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, lazy, useState } from 'react'
 import { Icon } from '@iconify/react'
 
 import { Toaster } from 'react-hot-toast'
@@ -8,10 +8,12 @@ import { useUserId } from '@nhost/react'
 import { GET_COLLECTIONS_BY_USER_ID_QUERY } from '@/graphql/queries'
 import { CollectionList } from '@/components/collection/CollectionList'
 import { CollectionsFetchError } from '@/components/error/CollectionsFetchError'
-import LoadingCollections from '@/components/loading/LoadingCollections'
+import LoadingCollectionsSkeleton from '@/components/loading/LoadingCollectionsSkeleton'
 import { CollectionQuery, CollectionQueryVariables } from '@/types'
-import { CreateCollectionModal } from '@/components/collection/CreateCollectionModal'
 
+const LazyCreateCollectionModal = lazy(
+	() => import('@/components/collection/CreateCollectionModal')
+)
 export default function MainHomePage() {
 	const [noteName, setNoteName] = useState('')
 	const userId = useUserId()
@@ -38,28 +40,20 @@ export default function MainHomePage() {
 	}
 	if (error) return <CollectionsFetchError />
 	return (
-		<section className="h-full space-y-2 ">
-			<h1 className="text-3xl text-center font-semibold m-6">
-				Mis colecciones actuales
-			</h1>
-			<article className="h-12  mt-5  items-center space-x-3 mb-6 container mx-auto max-w-5xl flex flex-row justify-center">
-				<input
-					type="text"
-					placeholder="Buscar colección por nombre..."
-					value={noteName}
-					onChange={onChange}
-					name="noteName"
-					className="px-5 py-3  rounded-lg border-2 border-gray-200 xl:w-2/4 max-w-2xl"
-				/>
-				<button title="Crear nueva colección">
+		<section className="h-full space-y-6 ">
+			<article className="h-12  mt-5  items-center space-x-6 mb-6 container mx-auto max-w-5xl flex flex-row justify-center">
+				<h1 className="text-3xl text-center font-semibold mt-2 mb-3">
+					Mis colecciones actuales
+				</h1>
+				<button title="Crear nueva nota">
 					<Icon icon="uil:folder-plus" className="h-8 w-8" onClick={openModal} />
 				</button>
 			</article>
+			{!loading && collections && (
+				<CollectionList collections={collections?.collections} />
+			)}
 
-			{loading && <LoadingCollections />}
-			{collections && <CollectionList collections={collections?.collections} />}
-
-			<CreateCollectionModal closeModal={closeModal} isOpen={isOpen} />
+			<LazyCreateCollectionModal closeModal={closeModal} isOpen={isOpen} />
 			<Toaster position="top-right" />
 		</section>
 	)

@@ -6,7 +6,6 @@ import { motion } from 'framer-motion'
 import { Fragment } from 'react'
 import LoadingAvatar from '@/components/loading/LoadingAvatar'
 
-
 type AvatarProps = {
 	user: ReturnType<typeof useUserData>
 }
@@ -102,14 +101,9 @@ export default function HomeOutlet() {
 				</nav>
 			</header>
 
-			<motion.main
-				initial="initial"
-				animate="enter"
-				variants={transitionVariants}
-				className="h-screen "
-			>
+			<main className="h-screen ">
 				<Outlet />
-			</motion.main>
+			</main>
 		</>
 	)
 }

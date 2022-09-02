@@ -45,11 +45,13 @@ export default function ColllectionOutlet() {
 	)
 	return (
 		<>
-			<section className="xl:flex xl:flex-row h-screen  hidden">
+			<section className="xl:flex lg:flex md:flex xl:flex-row h-screen  hidden">
 				<div className="w-96  shadow-sm   border-neutral-100 border-r-2 rounded h-full col-start-1 col-end-1 container mx-auto">
 					<h1 className=" font-bold text-lg mx-4 mt-2  ">COLECCIONES</h1>
 					{!loading && collections && (
-						<CollectionsListDisplay collections={collections?.collections} />
+						<>
+							<CollectionsListDisplay collections={collections?.collections} />
+						</>
 					)}
 				</div>
 				<article className="grid place-items-center w-full items-center">

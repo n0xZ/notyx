@@ -18,7 +18,6 @@ export default function RegisterPage() {
 		register,
 		formState: { errors },
 		handleSubmit,
-		reset,
 	} = useForm<z.infer<typeof signUpValidator>>({
 		resolver: zodResolver(signUpValidator),
 	})
@@ -27,22 +26,31 @@ export default function RegisterPage() {
 	const onSubmit = handleSubmit(async ({ email, password }) => {
 		await signUpEmailPassword(email, password)
 	})
-	if (isSuccess) return <Navigate to="/home/main" replace={true} />
+	if (isSuccess) return <Navigate to="/home/general" replace={true} />
 	return (
 		<section className="grid place-items-center h-full min-h-screen">
-			<article className=" container mx-auto ">
-				{needsEmailVerification ? (
-					<p>Por favor, revise su correo para confirmar su cuenta.</p>
-				) : (
+			{needsEmailVerification ? (
+				<p>Por favor, revise su correo para confirmar su cuenta.</p>
+			) : (
+				<article className="container mx-auto grid xl:grid-cols-2 grid-cols-1 place-items-center h-full">
 					<form
 						onSubmit={onSubmit}
-						className="flex flex-col items-center justify-center space-y-2 container mx-auto"
+						className="flex flex-col items-center justify-center space-y-4 container mx-auto   rounded-xl"
 					>
+						<h1 className="mb-2 text-3xl font-bold text-center">
+							Bienvenido a Notyx!
+						</h1>
+						<p className="mb-3 text-center">
+							Estas a un paso de poder crear tus colecciones de notas personalizadas,
+							de manera flexible y eficiente.
+						</p>
 						<FormField
 							errors={errors.email?.message}
 							disabled={isLoading}
+							type="email"
 							name="email"
 							label="Correo electrónico"
+							placeholder="gonzalo123@miemail.com"
 							register={register}
 						/>
 						<FormField
@@ -51,18 +59,26 @@ export default function RegisterPage() {
 							type="password"
 							disabled={isLoading}
 							label="Contraseña"
+							placeholder="gonzalo123*"
 							register={register}
 						/>
 						<button
 							type="submit"
-							className="p-3 mb-2 text-lg font-bold rounded-xl bg-amber  w-96"
+							className="p-3 mb-2 text-lg font-medium rounded-xl bg-rose-200  w-96"
 							disabled={isLoading}
 						>
-							Crear nueva cuenta
+							{isLoading ? 'Creando...' : 'Crear cuenta'}
 						</button>
 					</form>
-				)}
-			</article>
+					<img
+						src="https://opendoodles.s3-us-west-1.amazonaws.com/reading.svg"
+						alt="Ilustración de login"
+						height={500}
+						width={500}
+						className="xl:block hidden"
+					/>
+				</article>
+			)}
 		</section>
 	)
 }

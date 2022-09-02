@@ -43,10 +43,10 @@ export default function LoginPage() {
 					onSubmit={onSubmit}
 					className="flex flex-col items-center justify-center space-y-4 container mx-auto   rounded-xl"
 				>
-					<h1 className="mb-2 text-3xl font-bold">Bienvenido a Notyx!</h1>
-					<p className="mb-3">
-						Estas a un paso de poder crear tus notas personalizadas, de manera
-						flexible y eficiente.
+					<h1 className="mb-2 text-3xl font-bold text-center">Bienvenido a Notyx!</h1>
+					<p className="mb-3 text-center">
+						Estas a un paso de poder crear tus colecciones de notas personalizadas, de
+						manera flexible y eficiente.
 					</p>
 					<FormField
 						errors={errors.email?.message}
@@ -71,10 +71,11 @@ export default function LoginPage() {
 					>
 						{isLoading ? 'Iniciando...' : 'Iniciar sesión'}
 					</button>
-					<p>
-						No posee cuenta?
-						<Link to="/register">haga click aquí para crear una nueva cuenta</Link>
-					</p>
+
+					<Link to="/register" className="text-neutral-400">
+						No poseo una cuenta
+					</Link>
+
 					<span className="h-12 text-red-500">{error && error.message}</span>
 				</form>
 				<img
