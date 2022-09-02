@@ -4,20 +4,25 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import toast from 'react-hot-toast'
-import { useMutation } from '@apollo/client'
+import { ApolloQueryResult, useMutation } from '@apollo/client'
 import { useUserId } from '@nhost/react'
 import { Dialog, Transition } from '@headlessui/react'
 import uuid from 'react-uuid'
 import { CREATE_NOTE_ON_EXISTING_COLLECTION_MUTATION } from '@/graphql/mutations'
 
 import { FormField } from '@/components/form/FormField'
+import { CollectionVariables } from '@/pages/home/collections/[collectionId]'
 
-import { Note } from '@/types'
+import { Note, CollectionQuery } from '@/types'
 
 type CreateNoteModalProps = {
 	isOpen: boolean
 	closeModal: () => void
 	collectionId?: string
+	actualNotes: Note[]
+	refetch: (
+		variables?: Partial<CollectionVariables> | undefined
+	) => Promise<ApolloQueryResult<CollectionQuery>>
 }
 
 export type CreateNoteMutationReturnType = {
@@ -36,6 +41,8 @@ export function CreateNoteModal({
 	isOpen,
 	closeModal,
 	collectionId,
+	actualNotes,
+	refetch,
 }: CreateNoteModalProps) {
 	const userId = useUserId()
 	const {
@@ -52,6 +59,7 @@ export function CreateNoteModal({
 	>(CREATE_NOTE_ON_EXISTING_COLLECTION_MUTATION)
 	const onSubmit = handleSubmit((values) => {
 		const collectionNotes: Note[] = [
+			...actualNotes,
 			{
 				noteId: uuid(),
 				title: values.title,
@@ -69,13 +77,13 @@ export function CreateNoteModal({
 				},
 			}),
 			{
-				success: 'Tarea creada con exito',
+				success: 'nota creada con exito',
 				error: 'Ocurrió un error al crear la nota',
 				loading: 'Creando nota...',
 			}
 		)
 	})
-
+	if (result.data) refetch({ collectionId })
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
 			<Dialog as="div" className="relative z-10" onClose={closeModal}>
