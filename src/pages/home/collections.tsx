@@ -23,9 +23,12 @@ function CollectionsListDisplay({ collections }: CollectionListProps) {
 							}  duration-100 ease-in-out`
 						}
 					>
-						<Icon icon="uil:folder" className="h-4 w-4" />
-						<span className="truncate"> {collection.title}</span>
+						<div className="flex flex-row items-center space-x-3">
+							<Icon icon="uil:folder" className="h-4 w-4" />
+							<span className="truncate"> {collection.title}</span>
+						</div>
 					</NavLink>
+					<Icon icon="uil:folder" className="h-4 w-4" />
 				</div>
 			))}
 		</div>
