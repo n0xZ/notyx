@@ -25,10 +25,10 @@ type CreateNoteModalProps = {
 	) => Promise<ApolloQueryResult<CollectionQuery>>
 }
 
-export type CreateNoteMutationReturnType = {
+ type CreateNoteMutationReturnType = {
 	insert_notes_one: Note
 }
-export type CreateNoteMutationVariables = {
+ type CreateNoteMutationVariables = {
 	userId: string
 	collectionId?: string
 	collectionNotes: Note[]

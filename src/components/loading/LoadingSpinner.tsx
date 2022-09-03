@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react'
 export function LoadingSpinner() {
 	return (
 		<aside className="h-full w-full flex flex-col justify-center items-center opacity-40 space-y-2">

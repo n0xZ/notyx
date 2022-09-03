@@ -30,16 +30,3 @@ export const CREATE_COLLECTION_MUTATION = gql`
 		}
 	}
 `
-
-export const DELETE_COLLECTION = gql`
-	mutation deleteCollection($collectionId: uuid!) {
-		delete_collections(where: { collectionId: { _eq: $collectionId } }) {
-			returning {
-				userId
-				title
-				collectionNotes
-				collectionId
-			}
-		}
-	}
-`
