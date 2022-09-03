@@ -1,6 +1,65 @@
-import { ReactNode } from 'react'
+import { ReactNode, Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { Menu, Transition } from '@headlessui/react'
+import { Icon } from '@iconify/react'
+
+function NavMenu() {
+	return (
+		<Menu
+			as="div"
+			className="relative xl:hidden lg:hidden inline-block text-left"
+		>
+			<div>
+				<Menu.Button className="inline-flex w-full justify-center items-center rounded-md bg-zinc-900 bg-opacity-60 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+					<Icon
+						icon="uil:align-justify"
+						className=" h-5 w-5 text-rose-200 hover:text-rose-100"
+						aria-hidden="true"
+					/>
+				</Menu.Button>
+			</div>
+			<Transition
+				as={Fragment}
+				enter="transition ease-out duration-100"
+				enterFrom="transform opacity-0 scale-95"
+				enterTo="transform opacity-100 scale-100"
+				leave="transition ease-in duration-75"
+				leaveFrom="transform opacity-100 scale-100"
+				leaveTo="transform opacity-0 scale-95"
+			>
+				<Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+					<div className="px-1 py-1 ">
+						<Menu.Item>
+							{({ active }) => (
+								<NavLink
+									to="/login"
+									className={`${
+										active ? 'bg-rose-600 text-white' : 'text-gray-900'
+									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+								>
+									Iniciar sesión
+								</NavLink>
+							)}
+						</Menu.Item>
+						<Menu.Item>
+							{({ active }) => (
+								<NavLink
+									to="/register"
+									className={`${
+										active ? 'bg-rose-600 text-white' : 'text-gray-900'
+									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+								>
+									Unete ya!
+								</NavLink>
+							)}
+						</Menu.Item>
+					</div>
+				</Menu.Items>
+			</Transition>
+		</Menu>
+	)
+}
 export const LandingLayout = ({ children }: { children: ReactNode }) => {
 	const transitionVariants = {
 		initial: {
@@ -20,9 +79,8 @@ export const LandingLayout = ({ children }: { children: ReactNode }) => {
 		<>
 			<header className="p-4">
 				<nav className="flex flex-row items-center justify-between container mx-auto max-w-6xl font-bold">
-					<NavLink to="/" className={({ isActive }) => (isActive ? '' : '')}>
-						Notyx
-					</NavLink>
+					<NavLink to="/">Notyx</NavLink>
+					<NavMenu />
 					<ul className="xl:flex flex-row items-center space-x-5 hidden xl:sticky">
 						<li>
 							<NavLink to="/login">Iniciar sesión</NavLink>
