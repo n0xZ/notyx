@@ -31,28 +31,20 @@ function NavMenu() {
 				<Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 					<div className="px-1 py-1 ">
 						<Menu.Item>
-							{({ active }) => (
-								<NavLink
-									to="/login"
-									className={`${
-										active ? 'bg-rose-600 text-white' : 'text-gray-900'
-									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-								>
-									Iniciar sesión
-								</NavLink>
-							)}
+							<NavLink
+								to="/login"
+								className="group flex w-full items-center rounded-md px-2 py-2 text-sm text-gray-900"
+							>
+								Iniciar sesión
+							</NavLink>
 						</Menu.Item>
 						<Menu.Item>
-							{({ active }) => (
-								<NavLink
-									to="/register"
-									className={`${
-										active ? 'bg-rose-600 text-white' : 'text-gray-900'
-									} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-								>
-									Unete ya!
-								</NavLink>
-							)}
+							<NavLink
+								to="/register"
+								className="bg-rose-600 text-white group flex w-full items-center rounded-md px-2 py-2 text-sm"
+							>
+								Unete ya!
+							</NavLink>
 						</Menu.Item>
 					</div>
 				</Menu.Items>
