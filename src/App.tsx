@@ -11,7 +11,7 @@ const Login = lazy(() => import('./pages/login'))
 const Register = lazy(() => import('./pages/register'))
 const HomeOutlet = lazy(() => import('./pages/home'))
 const HomeGeneral = lazy(() => import('./pages/home/general'))
-const Profile = lazy(() => import('./pages/home/profile'))
+
 const CollectionsOutlet = lazy(() => import('./pages/home/collections'))
 const CollectionsHome = lazy(() => import('./pages/home/collections/general'))
 const DynamicCollections = lazy(
@@ -58,7 +58,6 @@ function App() {
 						}
 					/>
 
-					<Route path="profile" element={<Profile />} />
 					<Route
 						path="collections"
 						element={
