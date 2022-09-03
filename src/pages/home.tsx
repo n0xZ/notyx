@@ -36,13 +36,13 @@ export const Avatar = ({ user }: AvatarProps) => {
 						<Menu.Item>
 							{({ active }) => (
 								<NavLink
-									to="/home/profile"
+									to="/home/collections"
 									className={`${
 										active ? 'bg-rose-500 text-white' : 'text-gray-900'
 									} group flex w-full items-center rounded-md px-2 py-2 text-sm space-x-2`}
 								>
-									<Icon icon="uil:user-circle" />
-									<span>Mi perfil</span>
+									<Icon icon="uil:folder" />
+									<span>Colecciones de notas</span>
 								</NavLink>
 							)}
 						</Menu.Item>
