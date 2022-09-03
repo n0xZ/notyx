@@ -103,22 +103,16 @@ export default function Landing() {
 						Crea tus colecciones de notas de manera flexible
 					</h1>
 					<p>
-						En Notyx puedes crear tus colecciones de notas, para que no te olvides de tus apuntes!
+						En Notyx puedes crear tus colecciones de notas, para que no te olvides de
+						tus apuntes!
 					</p>
 					<aside className="flex flex-row space-x-3 justify-center items-center mt-2">
 						<NavLink
 							to="/login"
-							className="px-5 py-4 bg-rose-300 rounded-xl text-neutral-50"
+							className="px-5 py-4 bg-rose-300 rounded-xl text-neutral-100"
 							title="Comienza ya en Notyx"
 						>
 							Empezar ya
-						</NavLink>
-						<NavLink
-							to="/about"
-							className="bg-neutral-100 px-5 py-4 rounded-xl "
-							title="Acerca de Notyx"
-						>
-							Qué es Notyx?
 						</NavLink>
 					</aside>
 				</article>
