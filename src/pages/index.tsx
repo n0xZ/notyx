@@ -100,11 +100,10 @@ export default function Landing() {
 			<section className="flex flex-col justify-center items-center space-y-10 h-full ">
 				<article className="flex flex-col justify-center space-y-4 text-center">
 					<h1 className="xl:text-4xl text-2xl mb-2">
-						Crea tus notas de manera personalizada
+						Crea tus colecciones de notas de manera flexible
 					</h1>
 					<p>
-						En Notyx puedes crear tus apuntes personales, para que olvides de tus
-						tareas establecidas!
+						En Notyx puedes crear tus colecciones de notas, para que no te olvides de tus apuntes!
 					</p>
 					<aside className="flex flex-row space-x-3 justify-center items-center mt-2">
 						<NavLink
@@ -130,23 +129,6 @@ export default function Landing() {
 					height={480}
 					width={480}
 				/>
-			</section>
-
-			<section className="grid place-items-center h-screen bg-rose-200">
-				<article className="flex flex-col justify-center space-y-3 text-center">
-					<h1 className="text-3xl">Que puedes realizar en Notyx?</h1>
-					<aside className="flex flex-row space-x-3 justify-center items-center">
-						<NavLink
-							to="/login"
-							className="px-5 py-4 bg-rose-300 rounded-xl text-neutral-100"
-						>
-							Comienza ya
-						</NavLink>
-						<NavLink to="/about" className="bg-neutral-50 px-5 py-3 rounded-xl">
-							Qué es Notyx?
-						</NavLink>
-					</aside>
-				</article>
 			</section>
 		</LandingLayout>
 	)
